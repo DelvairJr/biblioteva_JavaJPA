@@ -1,16 +1,18 @@
 package br.com.biblioteca.model;
 
+import javax.annotation.Generated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Livro {
+public class Resumo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titulo;
+    private String texto;
 
     public Long getId() {
         return id;
@@ -20,14 +22,14 @@ public class Livro {
         this.id = id;
     }
 
-    public String getTitulo() {
-        return titulo;
+    public String getTexto() {
+        return texto;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
+    public void setTexto(String texto) {
+        this.texto = texto;
     }
     
     
-    
+
 }

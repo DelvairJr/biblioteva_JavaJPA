@@ -17,8 +17,7 @@ public class Editora implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String nome;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "editora") //Uma editora possui varios livros mappedBy -> para dizer a qual tabela faz referencia
-    @JoinColumn(name = "id") //para informar qual coluna que uni as duas tabelas
+    @OneToMany(mappedBy = "editora") //Uma editora possui varios livros mappedBy -> para dizer a qual tabela faz referencia
     private List<Livro> livros; //lista para armazenar os livros
 
     public Long getId() {

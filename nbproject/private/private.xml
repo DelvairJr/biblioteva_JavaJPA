@@ -1,17 +1,20 @@
-<<<<<<< HEAD
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/dao/exceptions/PreexistingEntityException.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/model/Editora.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/META-INF/persistence.xml</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/model/Resumo.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/dao/AutorDAO.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/dao/exceptions/NonexistentEntityException.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/model/Livro.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/dao/EditoraDAO.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/dao/exceptions/IllegalOrphanException.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/dao/LivroDAO.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/teste/TesteBiblioteca.java</file>
+            <file>file:/C:/Users/Junior/Documents/NetBeansProjects/DBF/Biblioteca/src/br/com/biblioteca/dao/ResumoDAO.java</file>
+        </group>
     </open-files>
 </project-private>
-=======
-<?xml version="1.0" encoding="UTF-8"?>
-<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
-    </open-files>
-</project-private>
->>>>>>> 6fa488e0eea0f8d96d3d9b1d097b78332c6bca9c

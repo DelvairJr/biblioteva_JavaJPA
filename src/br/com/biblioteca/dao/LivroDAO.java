@@ -1,8 +1,7 @@
-
 package br.com.biblioteca.dao;
 
 import br.com.biblioteca.dao.exceptions.NonexistentEntityException;
-import br.com.biblioteca.model.Editora;
+import br.com.biblioteca.model.Livro;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,25 +12,29 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
-public class EditoraDAO implements Serializable {
+/**
+ *
+ * @author Junior
+ */
+public class LivroDAO implements Serializable {
 
     private EntityManagerFactory emf = null;
-
-    public EditoraDAO() {
+    
+    public LivroDAO() {
         this.emf = Persistence.createEntityManagerFactory("BibliotecaPU");
     }
+ 
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Editora editora) {
+    public void create(Livro livro) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(editora);
+            em.persist(livro);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -40,19 +43,19 @@ public class EditoraDAO implements Serializable {
         }
     }
 
-    public void edit(Editora editora) throws NonexistentEntityException, Exception {
+    public void edit(Livro livro) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            editora = em.merge(editora);
+            livro = em.merge(livro);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = editora.getId();
-                if (findEditora(id) == null) {
-                    throw new NonexistentEntityException("The editora with id " + id + " no longer exists.");
+                Long id = livro.getId();
+                if (findLivro(id) == null) {
+                    throw new NonexistentEntityException("The livro with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -68,14 +71,14 @@ public class EditoraDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Editora editora;
+            Livro livro;
             try {
-                editora = em.getReference(Editora.class, id);
-                editora.getId();
+                livro = em.getReference(Livro.class, id);
+                livro.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The editora with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The livro with id " + id + " no longer exists.", enfe);
             }
-            em.remove(editora);
+            em.remove(livro);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -84,19 +87,19 @@ public class EditoraDAO implements Serializable {
         }
     }
 
-    public List<Editora> findEditoraEntities() {
-        return findEditoraEntities(true, -1, -1);
+    public List<Livro> findLivroEntities() {
+        return findLivroEntities(true, -1, -1);
     }
 
-    public List<Editora> findEditoraEntities(int maxResults, int firstResult) {
-        return findEditoraEntities(false, maxResults, firstResult);
+    public List<Livro> findLivroEntities(int maxResults, int firstResult) {
+        return findLivroEntities(false, maxResults, firstResult);
     }
 
-    private List<Editora> findEditoraEntities(boolean all, int maxResults, int firstResult) {
+    private List<Livro> findLivroEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Editora.class));
+            cq.select(cq.from(Livro.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -108,20 +111,20 @@ public class EditoraDAO implements Serializable {
         }
     }
 
-    public Editora findEditora(Long id) {
+    public Livro findLivro(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Editora.class, id);
+            return em.find(Livro.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getEditoraCount() {
+    public int getLivroCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Editora> rt = cq.from(Editora.class);
+            Root<Livro> rt = cq.from(Livro.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
@@ -129,5 +132,5 @@ public class EditoraDAO implements Serializable {
             em.close();
         }
     }
-
+    
 }

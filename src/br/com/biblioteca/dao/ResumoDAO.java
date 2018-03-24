@@ -1,8 +1,12 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.com.biblioteca.dao;
 
 import br.com.biblioteca.dao.exceptions.NonexistentEntityException;
-import br.com.biblioteca.model.Editora;
+import br.com.biblioteca.model.Resumo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -13,12 +17,15 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-
-public class EditoraDAO implements Serializable {
+/**
+ *
+ * @author Junior
+ */
+public class ResumoDAO implements Serializable {
 
     private EntityManagerFactory emf = null;
 
-    public EditoraDAO() {
+    public ResumoDAO() {
         this.emf = Persistence.createEntityManagerFactory("BibliotecaPU");
     }
 
@@ -26,12 +33,12 @@ public class EditoraDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Editora editora) {
+    public void create(Resumo resumo) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(editora);
+            em.persist(resumo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -40,19 +47,19 @@ public class EditoraDAO implements Serializable {
         }
     }
 
-    public void edit(Editora editora) throws NonexistentEntityException, Exception {
+    public void edit(Resumo resumo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            editora = em.merge(editora);
+            resumo = em.merge(resumo);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = editora.getId();
-                if (findEditora(id) == null) {
-                    throw new NonexistentEntityException("The editora with id " + id + " no longer exists.");
+                Long id = resumo.getId();
+                if (findResumo(id) == null) {
+                    throw new NonexistentEntityException("The resumo with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -68,14 +75,14 @@ public class EditoraDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Editora editora;
+            Resumo resumo;
             try {
-                editora = em.getReference(Editora.class, id);
-                editora.getId();
+                resumo = em.getReference(Resumo.class, id);
+                resumo.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The editora with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The resumo with id " + id + " no longer exists.", enfe);
             }
-            em.remove(editora);
+            em.remove(resumo);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -84,19 +91,19 @@ public class EditoraDAO implements Serializable {
         }
     }
 
-    public List<Editora> findEditoraEntities() {
-        return findEditoraEntities(true, -1, -1);
+    public List<Resumo> findResumoEntities() {
+        return findResumoEntities(true, -1, -1);
     }
 
-    public List<Editora> findEditoraEntities(int maxResults, int firstResult) {
-        return findEditoraEntities(false, maxResults, firstResult);
+    public List<Resumo> findResumoEntities(int maxResults, int firstResult) {
+        return findResumoEntities(false, maxResults, firstResult);
     }
 
-    private List<Editora> findEditoraEntities(boolean all, int maxResults, int firstResult) {
+    private List<Resumo> findResumoEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Editora.class));
+            cq.select(cq.from(Resumo.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -108,20 +115,20 @@ public class EditoraDAO implements Serializable {
         }
     }
 
-    public Editora findEditora(Long id) {
+    public Resumo findResumo(Long id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Editora.class, id);
+            return em.find(Resumo.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getEditoraCount() {
+    public int getResumoCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Editora> rt = cq.from(Editora.class);
+            Root<Resumo> rt = cq.from(Resumo.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
